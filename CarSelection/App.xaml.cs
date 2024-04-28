@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarSelection.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,14 @@ namespace CarSelection
     /// </summary>
     public partial class App : Application
     {
+        private static CarSelectionEntities _context;
+        public static CarSelectionEntities GetContext()
+        {
+            if (_context == null)
+            {
+                _context = new CarSelectionEntities();
+            }
+            return _context;
+        }
     }
 }

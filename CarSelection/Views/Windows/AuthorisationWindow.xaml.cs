@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BusTrips.Assets;
+using CarSelection.Assets;
+using CarSelection.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +22,60 @@ namespace CarSelection.Views.Windows
     /// </summary>
     public partial class AuthorisationWindow : Window
     {
+        private CarSelectionEntities _context=App.GetContext();
         public AuthorisationWindow()
         {
             InitializeComponent();
+        }
+
+        private void enterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<User> users = _context.User.ToList();
+
+            if (LoginTb.Text == "" && PasswordTb.Password == "")
+            {
+                MessageBoxHelper.Error("Введите логин и пароль");
+            }
+            else if (LoginTb.Text == "")
+            {
+                MessageBoxHelper.Error("Введите логин");
+            }
+            else if (PasswordTb.Password == "")
+            {
+                MessageBoxHelper.Error("Введите пароль");
+            }
+            else
+            {
+                string login = LoginTb.Text;
+                string password = PasswordTb.Password;
+                foreach (User user in users)
+                {
+                    if (user.Login == login & user.Password == password)
+                    {
+                        Transporter.SelectedUser = user;
+                        DialogResult = true;
+                        this.Close();
+                        break;
+                    }
+                    else if (user.Login != login)
+                    {
+                        MessageBoxHelper.Error("Пользователь с данным логином не найден");
+                        break;
+                    }
+                    else if (user.Login == login & user.Password != password)
+                    {
+                        MessageBoxHelper.Error("Неправильно введен пароль");
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow registrationWindow = new RegistrationWindow();
+            registrationWindow.ShowDialog();
+            Close();
         }
     }
 }

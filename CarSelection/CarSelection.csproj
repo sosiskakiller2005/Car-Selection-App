@@ -68,6 +68,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Assets\MessageBoxHelper.cs" />
+    <Compile Include="Assets\Transporter.cs" />
     <Compile Include="Model\Advertisement.cs">
       <DependentUpon>CarSelectionModel.tt</DependentUpon>
     </Compile>
@@ -128,8 +130,20 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>CarSelectionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\LoggedFrame.xaml.cs">
+      <DependentUpon>LoggedFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\NotLoggedFrame.xaml.cs">
+      <DependentUpon>NotLoggedFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\AuthorisationWindow.xaml.cs">
       <DependentUpon>AuthorisationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
+      <DependentUpon>RegistrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -167,7 +181,47 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Styles\ButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\DatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\PasswordBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBlockStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\TextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\LoggedFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\NotLoggedFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\AuthorisationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\RegistrationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,14 +237,11 @@
       <DependentUpon>CarSelectionModel.edmx</DependentUpon>
       <LastGenOutput>CarSelectionModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\auto-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
-    <Folder Include="Styles\" />
-    <Folder Include="Views\Pages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
