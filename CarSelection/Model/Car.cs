@@ -18,7 +18,6 @@ namespace CarSelection.Model
         public Car()
         {
             this.Advertisement = new HashSet<Advertisement>();
-            this.Photo = new HashSet<Photo>();
         }
     
         public int Id { get; set; }
@@ -33,6 +32,7 @@ namespace CarSelection.Model
         public int ColourId { get; set; }
         public long Mileage { get; set; }
         public Nullable<int> DealershipId { get; set; }
+        public Nullable<int> PhotoId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Advertisement> Advertisement { get; set; }
@@ -43,7 +43,6 @@ namespace CarSelection.Model
         public virtual Drive Drive { get; set; }
         public virtual Engine Engine { get; set; }
         public virtual Transmission Transmission { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Photo> Photo { get; set; }
+        public virtual Photo Photo { get; set; }
     }
 }

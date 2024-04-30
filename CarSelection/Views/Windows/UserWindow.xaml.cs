@@ -21,6 +21,7 @@ namespace CarSelection.Views.Windows
     /// </summary>
     public partial class UserWindow : Window
     {
+        private CarSelectionEntities _context = App.GetContext();
         public UserWindow(User selectedUser)
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace CarSelection.Views.Windows
         public UserWindow()
         {
             InitializeComponent();
+            adsLv.ItemsSource = _context.Advertisement.ToList();
 
         }
 
@@ -37,11 +39,23 @@ namespace CarSelection.Views.Windows
             authorisationWindow.ShowDialog();
             if (authorisationWindow.DialogResult == true)
             {
-                LoggedFrame loggedFrame = new LoggedFrame();
                 AuthorisationBtn.Visibility = Visibility.Collapsed;
                 ProfileBtn.Visibility = Visibility.Visible;
                 AdsBtn.Visibility = Visibility.Visible;
+                FavouriteAdsBtn.Visibility = Visibility.Visible;
             }
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void adsLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Advertisement selectedAd = adsLv.SelectedItem as Advertisement;
+            CarWindow carWindow = new CarWindow(selectedAd);
+            carWindow.ShowDialog();
         }
     }
 }

@@ -139,6 +139,9 @@
     <Compile Include="Views\Windows\AuthorisationWindow.xaml.cs">
       <DependentUpon>AuthorisationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Windows\CarWindow.xaml.cs">
+      <DependentUpon>CarWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\CarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,20 +234,22 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\auto-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\CarSelectionModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CarSelectionModel.Context.cs</LastGenOutput>
       <DependentUpon>CarSelectionModel.edmx</DependentUpon>
+      <LastGenOutput>CarSelectionModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\CarSelectionModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CarSelectionModel.edmx</DependentUpon>
       <LastGenOutput>CarSelectionModel.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\auto-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

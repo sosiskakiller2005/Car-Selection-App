@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CarSelectionDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище CarSelectionDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Advertisement">
           <Key>
             <PropertyRef Name="Id" />
@@ -50,6 +50,7 @@
           <Property Name="ColourId" Type="int" Nullable="false" />
           <Property Name="Mileage" Type="bigint" Nullable="false" />
           <Property Name="DealershipId" Type="int" />
+          <Property Name="PhotoId" Type="int" />
         </EntityType>
         <EntityType Name="Colour">
           <Key>
@@ -96,7 +97,6 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Route" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CarId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -104,7 +104,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="SaleId" Type="int" Nullable="false" />
+          <Property Name="AdvertismentId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -237,6 +237,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Car_Photo">
+          <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+          <End Role="Car" Type="Self.Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Car_Transmission">
           <End Role="Transmission" Type="Self.Transmission" Multiplicity="1" />
           <End Role="Car" Type="Self.Car" Multiplicity="*" />
@@ -261,18 +273,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Photo_Car">
-          <End Role="Car" Type="Self.Car" Multiplicity="1" />
-          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Photo">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sale_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="1" />
           <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
@@ -293,7 +293,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Sale">
-              <PropertyRef Name="SaleId" />
+              <PropertyRef Name="AdvertismentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -357,6 +357,10 @@
             <End Role="Engine" EntitySet="Engine" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
+          <AssociationSet Name="FK_Car_Photo" Association="Self.FK_Car_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
           <AssociationSet Name="FK_Car_Transmission" Association="Self.FK_Car_Transmission">
             <End Role="Transmission" EntitySet="Transmission" />
             <End Role="Car" EntitySet="Car" />
@@ -364,10 +368,6 @@
           <AssociationSet Name="FK_Engine_TypeOfFuel" Association="Self.FK_Engine_TypeOfFuel">
             <End Role="TypeOfFuel" EntitySet="TypeOfFuel" />
             <End Role="Engine" EntitySet="Engine" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Photo_Car" Association="Self.FK_Photo_Car">
-            <End Role="Car" EntitySet="Car" />
-            <End Role="Photo" EntitySet="Photo" />
           </AssociationSet>
           <AssociationSet Name="FK_Sale_Car" Association="Self.FK_Sale_Car">
             <End Role="Car" EntitySet="Car" />
@@ -382,8 +382,7 @@
             <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarSelectionDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -446,7 +445,8 @@
           <NavigationProperty Name="Drive" Relationship="Self.FK_Car_Drive" FromRole="Car" ToRole="Drive" />
           <NavigationProperty Name="Engine" Relationship="Self.FK_Car_Engine" FromRole="Car" ToRole="Engine" />
           <NavigationProperty Name="Transmission" Relationship="Self.FK_Car_Transmission" FromRole="Car" ToRole="Transmission" />
-          <NavigationProperty Name="Photo" Relationship="Self.FK_Photo_Car" FromRole="Car" ToRole="Photo" />
+          <Property Name="PhotoId" Type="Int32" />
+          <NavigationProperty Name="Photo" Relationship="CarSelectionDbModel.FK_Car_Photo" FromRole="Car" ToRole="Photo" />
         </EntityType>
         <EntityType Name="Colour">
           <Key>
@@ -499,8 +499,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Route" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CarId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Car" Relationship="Self.FK_Photo_Car" FromRole="Photo" ToRole="Car" />
+          <NavigationProperty Name="Car" Relationship="CarSelectionDbModel.FK_Car_Photo" FromRole="Photo" ToRole="Car" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -508,7 +507,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="SaleId" Type="Int32" Nullable="false" />
+          <Property Name="AdvertismentId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Advertisement" Relationship="Self.FK_Selling_Sale" FromRole="Sale" ToRole="Advertisement" />
           <NavigationProperty Name="User" Relationship="Self.FK_Selling_User" FromRole="Sale" ToRole="User" />
         </EntityType>
@@ -571,7 +570,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Sale">
-              <PropertyRef Name="SaleId" />
+              <PropertyRef Name="AdvertismentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -683,18 +682,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Photo_Car">
-          <End Role="Car" Type="Self.Car" Multiplicity="1" />
-          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Car">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Photo">
-              <PropertyRef Name="CarId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Engine_TypeOfFuel">
           <End Role="TypeOfFuel" Type="Self.TypeOfFuel" Multiplicity="1" />
           <End Role="Engine" Type="Self.Engine" Multiplicity="*" />
@@ -779,10 +766,6 @@
             <End Role="Transmission" EntitySet="Transmission" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
-          <AssociationSet Name="FK_Photo_Car" Association="Self.FK_Photo_Car">
-            <End Role="Car" EntitySet="Car" />
-            <End Role="Photo" EntitySet="Photo" />
-          </AssociationSet>
           <AssociationSet Name="FK_Engine_TypeOfFuel" Association="Self.FK_Engine_TypeOfFuel">
             <End Role="TypeOfFuel" EntitySet="TypeOfFuel" />
             <End Role="Engine" EntitySet="Engine" />
@@ -791,7 +774,23 @@
             <End Role="User" EntitySet="User" />
             <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
+          <AssociationSet Name="FK_Car_Photo" Association="CarSelectionDbModel.FK_Car_Photo">
+            <End Role="Photo" EntitySet="Photo" />
+            <End Role="Car" EntitySet="Car" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_Car_Photo">
+          <End Type="CarSelectionDbModel.Photo" Role="Photo" Multiplicity="0..1" />
+          <End Type="CarSelectionDbModel.Car" Role="Car" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Car">
+              <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -833,6 +832,7 @@
           <EntitySetMapping Name="Car">
             <EntityTypeMapping TypeName="CarSelectionDbModel.Car">
               <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
@@ -897,7 +897,6 @@
               <MappingFragment StoreEntitySet="Photo">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Route" ColumnName="Route" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -906,7 +905,7 @@
               <MappingFragment StoreEntitySet="Sale">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="AdvertismentId" ColumnName="AdvertismentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

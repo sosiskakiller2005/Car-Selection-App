@@ -16,7 +16,7 @@ namespace CarSelection.Model
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public int SaleId { get; set; }
+        public int AdvertismentId { get; set; }
     
         public virtual Advertisement Advertisement { get; set; }
         public virtual User User { get; set; }
