@@ -1,0 +1,69 @@
+﻿<Page x:Class="CarSelection.Views.Pages.AdvertismentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CarSelection.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="704" d:DesignWidth="830"
+      Title="AdvertismentsPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <ComboBox Name="BrandsCmb" SelectionChanged="BrandsCmb_SelectionChanged"/>
+            <ComboBox Name="BodysCmb" Grid.Column="2" SelectionChanged="BodysCmb_SelectionChanged"/>
+            <ComboBox Name="EngineTypesCmb" Grid.Column="4" SelectionChanged="EngineTypesCmb_SelectionChanged"/>
+        </Grid>
+        <ListView Name="AdsLv" Grid.Row="1" SelectionChanged="adsLv_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Height="250">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="400" />
+                                        <ColumnDefinition Width="350" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="40" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock TextWrapping="Wrap">
+                                            <TextBlock.Text>
+                                                <MultiBinding StringFormat="{}{0} {1}, {2:yyy}">
+                                                    <Binding Path="Car.Brand.Name"/>
+                                                    <Binding Path="Car.Model"/>
+                                                    <Binding Path="Car.DateOfRelease"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                        <TextBlock Grid.Row="1" Text="{Binding Cost, StringFormat={}{0:N0} руб.}"/>
+                                        <TextBlock Grid.Row="2" Text="{Binding Car.Mileage, StringFormat={}{0} км.}"/>
+                                    </Grid>
+                                    <Image Stretch="Uniform" Grid.Column="1" Source="{Binding Car.Photo.Route}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</Page>

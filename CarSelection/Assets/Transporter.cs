@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CarSelection.Assets
 {
-    public class Transporter
+    public static class Transporter
     {
         public static User SelectedUser {  get; set; }
     }

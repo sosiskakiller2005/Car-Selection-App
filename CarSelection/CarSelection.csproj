@@ -112,6 +112,9 @@
     <Compile Include="Model\Engine.cs">
       <DependentUpon>CarSelectionModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Favourites.cs">
+      <DependentUpon>CarSelectionModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Photo.cs">
       <DependentUpon>CarSelectionModel.tt</DependentUpon>
     </Compile>
@@ -130,17 +133,23 @@
     <Compile Include="Model\User.cs">
       <DependentUpon>CarSelectionModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\LoggedFrame.xaml.cs">
-      <DependentUpon>LoggedFrame.xaml</DependentUpon>
+    <Compile Include="Views\Pages\AdvertismentsPage.xaml.cs">
+      <DependentUpon>AdvertismentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\NotLoggedFrame.xaml.cs">
-      <DependentUpon>NotLoggedFrame.xaml</DependentUpon>
+    <Compile Include="Views\Pages\FavouritesPage.xaml.cs">
+      <DependentUpon>FavouritesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\AuthorisationWindow.xaml.cs">
       <DependentUpon>AuthorisationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\CarWindow.xaml.cs">
       <DependentUpon>CarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\DealerShipWindow.xaml.cs">
+      <DependentUpon>DealerShipWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ProfileWindow.xaml.cs">
+      <DependentUpon>ProfileWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
@@ -208,11 +217,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\LoggedFrame.xaml">
+    <Page Include="Views\Pages\AdvertismentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\NotLoggedFrame.xaml">
+    <Page Include="Views\Pages\FavouritesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,6 +230,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\CarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\DealerShipWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ProfileWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,6 +267,8 @@
       <DependentUpon>CarSelectionModel.edmx</DependentUpon>
       <LastGenOutput>CarSelectionModel.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\white-heart-icon.jpg" />
+    <Resource Include="Resources\red-heart-icon.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

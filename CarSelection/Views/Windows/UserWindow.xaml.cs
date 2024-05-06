@@ -21,7 +21,6 @@ namespace CarSelection.Views.Windows
     /// </summary>
     public partial class UserWindow : Window
     {
-        private CarSelectionEntities _context = App.GetContext();
         public UserWindow(User selectedUser)
         {
             InitializeComponent();
@@ -29,8 +28,20 @@ namespace CarSelection.Views.Windows
         public UserWindow()
         {
             InitializeComponent();
-            adsLv.ItemsSource = _context.Advertisement.ToList();
+            AdvertismentsPage advertismentsPage = new AdvertismentsPage();
+            MainFrame.Navigate(advertismentsPage);
+        }
 
+        private void ProfileBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProfileWindow profileWindow = new ProfileWindow();
+            profileWindow.ShowDialog();
+        }
+
+        private void FavouritesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            FavouritesPage favouritesPage = new FavouritesPage();
+            MainFrame.Navigate(favouritesPage);
         }
 
         private void AuthorisationBtn_Click(object sender, RoutedEventArgs e)
@@ -39,23 +50,17 @@ namespace CarSelection.Views.Windows
             authorisationWindow.ShowDialog();
             if (authorisationWindow.DialogResult == true)
             {
-                AuthorisationBtn.Visibility = Visibility.Collapsed;
-                ProfileBtn.Visibility = Visibility.Visible;
                 AdsBtn.Visibility = Visibility.Visible;
-                FavouriteAdsBtn.Visibility = Visibility.Visible;
+                ProfileBtn.Visibility = Visibility.Visible;
+                FavouritesBtn.Visibility = Visibility.Visible;
+                AuthorisationBtn.Visibility = Visibility.Collapsed;
             }
         }
 
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        private void AdsBtn_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void adsLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Advertisement selectedAd = adsLv.SelectedItem as Advertisement;
-            CarWindow carWindow = new CarWindow(selectedAd);
-            carWindow.ShowDialog();
+            AdvertismentsPage advertismentsPages = new AdvertismentsPage();
+            MainFrame.Navigate(advertismentsPages);
         }
     }
 }

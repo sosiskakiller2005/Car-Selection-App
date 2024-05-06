@@ -18,6 +18,7 @@ namespace CarSelection.Model
         public Advertisement()
         {
             this.Sale = new HashSet<Sale>();
+            this.Favourites = new HashSet<Favourites>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace CarSelection.Model
         public virtual Car Car { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sale> Sale { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Favourites> Favourites { get; set; }
     }
 }

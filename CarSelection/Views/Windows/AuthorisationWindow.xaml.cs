@@ -22,7 +22,7 @@ namespace CarSelection.Views.Windows
     /// </summary>
     public partial class AuthorisationWindow : Window
     {
-        private CarSelectionEntities _context=App.GetContext();
+        private CarSelectionEntities _context = App.GetContext();
         public AuthorisationWindow()
         {
             InitializeComponent();

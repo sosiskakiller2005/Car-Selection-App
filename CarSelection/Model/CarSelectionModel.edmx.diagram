@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ec97a4d1176d443d8574b4c51e6b1c28" Name="Diagram1">
+      <Diagram DiagramId="ec97a4d1176d443d8574b4c51e6b1c28" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="CarSelectionDbModel.Advertisement" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSelectionDbModel.Body" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSelectionDbModel.Brand" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
@@ -34,6 +34,9 @@
         <AssociationConnector Association="CarSelectionDbModel.FK_Engine_TypeOfFuel" ManuallyRouted="false" />
         <AssociationConnector Association="CarSelectionDbModel.FK_Selling_User" ManuallyRouted="false" />
         <AssociationConnector Association="CarSelectionDbModel.FK_Car_Photo" />
+        <EntityTypeShape EntityType="CarSelectionDbModel.Favourites" Width="1.5" PointX="9.75" PointY="6.5" />
+        <AssociationConnector Association="CarSelectionDbModel.FK_Favourites_Advertisement" />
+        <AssociationConnector Association="CarSelectionDbModel.FK_Favourites_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

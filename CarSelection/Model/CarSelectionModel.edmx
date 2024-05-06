@@ -91,6 +91,14 @@
           <Property Name="HorsePower" Type="int" Nullable="false" />
           <Property Name="TypeOfFuelId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="AdvertismentId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Photo">
           <Key>
             <PropertyRef Name="Id" />
@@ -273,6 +281,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Favourites_Advertisement">
+          <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="AdvertismentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Favourites" Type="Self.Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Sale_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="1" />
           <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
@@ -319,6 +351,7 @@
           <EntitySet Name="DealerShip" EntityType="Self.DealerShip" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Drive" EntityType="Self.Drive" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Engine" EntityType="Self.Engine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favourites" EntityType="Self.Favourites" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
@@ -369,6 +402,14 @@
             <End Role="TypeOfFuel" EntitySet="TypeOfFuel" />
             <End Role="Engine" EntitySet="Engine" />
           </AssociationSet>
+          <AssociationSet Name="FK_Favourites_Advertisement" Association="Self.FK_Favourites_Advertisement">
+            <End Role="Advertisement" EntitySet="Advertisement" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_User" Association="Self.FK_Favourites_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
           <AssociationSet Name="FK_Sale_Car" Association="Self.FK_Sale_Car">
             <End Role="Car" EntitySet="Car" />
             <End Role="Advertisement" EntitySet="Advertisement" />
@@ -398,6 +439,7 @@
           <Property Name="DateOfPublish" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Sale_Car" FromRole="Advertisement" ToRole="Car" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_Selling_Sale" FromRole="Advertisement" ToRole="Sale" />
+          <NavigationProperty Name="Favourites" Relationship="CarSelectionDbModel.FK_Favourites_Advertisement" FromRole="Advertisement" ToRole="Favourites" />
         </EntityType>
         <EntityType Name="Body">
           <Key>
@@ -549,6 +591,7 @@
           <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Sale" Relationship="Self.FK_Selling_User" FromRole="User" ToRole="Sale" />
+          <NavigationProperty Name="Favourites" Relationship="CarSelectionDbModel.FK_Favourites_User" FromRole="User" ToRole="Favourites" />
         </EntityType>
         <Association Name="FK_Sale_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="1" />
@@ -778,6 +821,15 @@
             <End Role="Photo" EntitySet="Photo" />
             <End Role="Car" EntitySet="Car" />
           </AssociationSet>
+          <EntitySet Name="Favourites" EntityType="CarSelectionDbModel.Favourites" />
+          <AssociationSet Name="FK_Favourites_Advertisement" Association="CarSelectionDbModel.FK_Favourites_Advertisement">
+            <End Role="Advertisement" EntitySet="Advertisement" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Favourites_User" Association="CarSelectionDbModel.FK_Favourites_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Favourites" EntitySet="Favourites" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Car_Photo">
           <End Type="CarSelectionDbModel.Photo" Role="Photo" Multiplicity="0..1" />
@@ -788,6 +840,40 @@
             </Principal>
             <Dependent Role="Car">
               <PropertyRef Name="PhotoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Favourites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="AdvertismentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Advertisement" Relationship="CarSelectionDbModel.FK_Favourites_Advertisement" FromRole="Favourites" ToRole="Advertisement" />
+          <NavigationProperty Name="User" Relationship="CarSelectionDbModel.FK_Favourites_User" FromRole="Favourites" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Favourites_Advertisement">
+          <End Type="CarSelectionDbModel.Advertisement" Role="Advertisement" Multiplicity="1" />
+          <End Type="CarSelectionDbModel.Favourites" Role="Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisement">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="AdvertismentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Favourites_User">
+          <End Type="CarSelectionDbModel.User" Role="User" Multiplicity="1" />
+          <End Type="CarSelectionDbModel.Favourites" Role="Favourites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favourites">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -945,6 +1031,15 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favourites">
+            <EntityTypeMapping TypeName="CarSelectionDbModel.Favourites">
+              <MappingFragment StoreEntitySet="Favourites">
+                <ScalarProperty Name="AdvertismentId" ColumnName="AdvertismentId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

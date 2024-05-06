@@ -40,5 +40,6 @@ namespace CarSelection.Model
         public virtual DbSet<Transmission> Transmission { get; set; }
         public virtual DbSet<TypeOfFuel> TypeOfFuel { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Favourites> Favourites { get; set; }
     }
 }
