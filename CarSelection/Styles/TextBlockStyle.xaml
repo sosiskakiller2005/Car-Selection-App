@@ -3,5 +3,7 @@
     <Style TargetType="TextBlock">
         <Setter Property="FontSize" Value="30" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Inter" />
+
     </Style>
 </ResourceDictionary>   

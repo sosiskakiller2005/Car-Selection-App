@@ -68,6 +68,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Assets\HyperLinkHelper.cs" />
     <Compile Include="Assets\MessageBoxHelper.cs" />
     <Compile Include="Assets\Transporter.cs" />
     <Compile Include="Model\Advertisement.cs">

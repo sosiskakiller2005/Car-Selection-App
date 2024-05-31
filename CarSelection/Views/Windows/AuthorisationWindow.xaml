@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSelection.Views.Windows"
         mc:Ignorable="d"
-            Title="Окно авторизации" WindowStartupLocation="CenterScreen" Width="550" Height="300">
+            Title="Окно авторизации" WindowStartupLocation="CenterScreen" Width="550" Height="300" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30" />
@@ -23,9 +23,9 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         <TextBlock Text="Логин:" Grid.Row="1" Grid.Column="1"/>
-        <TextBox Name="LoginTb" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Name="LoginTb" Grid.Row="1" Grid.Column="2" MaxLength="30"/>
         <TextBlock Text="Пароль:" Grid.Row="3" Grid.Column="1"/>
-        <PasswordBox Name="PasswordTb" Grid.Column="2" Grid.Row="3" />
+        <PasswordBox Name="PasswordTb" Grid.Column="2" Grid.Row="3" MaxLength="18"/>
         <StackPanel Grid.Row="5" Grid.Column="1">
             <Button Name="EnterBtn" Grid.Column="1" Grid.Row="4" Content="Войти" Click="enterBtn_Click" Width="200"/>
             <TextBlock Name="RegisterTbl"  FontSize="15"  Grid.Row="4" Grid.Column="1" >

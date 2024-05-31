@@ -5,8 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CarSelection.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="704" d:DesignWidth="830"
-      Title="AdvertismentsPage">
+      d:DesignHeight="704" d:DesignWidth="830">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -49,7 +48,7 @@
                                             </TextBlock.Text>
                                         </TextBlock>
                                         <TextBlock Grid.Row="1" Text="{Binding Advertisement.Cost, StringFormat={}{0:N0} руб.}"/>
-                                        <TextBlock Grid.Row="2" Text="{Binding Car.Mileage, StringFormat={}{0} км.}"/>
+                                        <TextBlock Grid.Row="2" Text="{Binding Advertisement.Car.Mileage, StringFormat={}{0} км.}"/>
                                     </Grid>
                                     <Image Stretch="Uniform" Grid.Column="1" Source="{Binding Advertisement.Car.Photo.Route}"/>
                                 </Grid>

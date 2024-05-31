@@ -5,18 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSelection.Views.Windows"
         mc:Ignorable="d"
-        Title="DealerShipWindow" Height="600" Width="800">
+        Title="Окно дилера" Height="600" Width="850" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
-        <ScrollViewer>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
             <Grid Name="DealerShipGrid">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="300" />
+                    <RowDefinition Height="250" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <Image Stretch="Uniform" Source="{Binding Photo}"/>
+                <Image Stretch="Uniform" Source="{Binding Photo}" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Row="1" TextWrapping="Wrap" FontWeight="DemiBold">
                     <TextBlock.Text>
                         <MultiBinding StringFormat="{}{0}, {1}">
@@ -54,11 +55,7 @@
                                                     </TextBlock.Text>
                                                 </TextBlock>
                                                 <TextBlock Grid.Row="1" Text="{Binding Cost, StringFormat={}{0:N0} руб.}"/>
-                                                <TextBlock Grid.Row="2" >
-                                                <Hyperlink>
-                                                    <TextBlock Text="{Binding Car.DealerShip.Name}"/>
-                                                </Hyperlink>
-                                                </TextBlock>    
+                                                <TextBlock Grid.Row="2" Text="{Binding Car.Mileage, StringFormat={}{0} км.}"/>
                                             </Grid>
                                             <Image Stretch="Uniform" Grid.Column="1" Source="{Binding Car.Photo.Route}"/>
                                         </Grid>

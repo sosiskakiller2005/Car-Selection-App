@@ -51,6 +51,7 @@
           <Property Name="Mileage" Type="bigint" Nullable="false" />
           <Property Name="DealershipId" Type="int" />
           <Property Name="PhotoId" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Colour">
           <Key>
@@ -489,6 +490,7 @@
           <NavigationProperty Name="Transmission" Relationship="Self.FK_Car_Transmission" FromRole="Car" ToRole="Transmission" />
           <Property Name="PhotoId" Type="Int32" />
           <NavigationProperty Name="Photo" Relationship="CarSelectionDbModel.FK_Car_Photo" FromRole="Car" ToRole="Photo" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Colour">
           <Key>
@@ -918,6 +920,7 @@
           <EntitySetMapping Name="Car">
             <EntityTypeMapping TypeName="CarSelectionDbModel.Car">
               <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BrandId" ColumnName="BrandId" />

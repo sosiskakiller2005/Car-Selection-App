@@ -6,15 +6,15 @@
         xmlns:local="clr-namespace:CarSelection.Views.Windows"
         mc:Ignorable="d"
         Title="Главное окно" Height="720" Width="1080" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" >
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".3*" />
+            <ColumnDefinition Width=".35*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Background="#FF898989">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="100" />
                 <RowDefinition Height="auto" />
@@ -25,72 +25,12 @@
             </Grid.RowDefinitions>
 
             <Image Source="/Resources/auto-icon.png"/>
-            <TextBlock Text="Подбор авто" Grid.Row="1" HorizontalAlignment="Center"/>
+            <TextBlock Text="Car Store" Grid.Row="1" HorizontalAlignment="Center" FontWeight="SemiBold"/>
             <Button Margin="10" Name="AdsBtn" Click="AdsBtn_Click" Content="Все объявления" Grid.Row="2" HorizontalAlignment="Center" Visibility="Collapsed"/>
             <Button Margin="10" Name="ProfileBtn" Click="ProfileBtn_Click" Content="Профиль" Grid.Row="3" HorizontalAlignment="Center" Visibility="Collapsed"/>
             <Button Margin="10" Name="FavouritesBtn" Click="FavouritesBtn_Click" Content="Избранные" Grid.Row="4" HorizontalAlignment="Center" Visibility="Collapsed"/>
             <Button Name="AuthorisationBtn" Width="200" Content="Войти" Grid.Row="5" Click="AuthorisationBtn_Click" HorizontalAlignment="Center"/>
         </Grid>
         <Frame Name="MainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
-        <!--<Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
-
-            <Grid Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
-                <ComboBox Name="BrandsCmb" SelectionChanged="BrandsCmb_SelectionChanged"/>
-                <ComboBox Name="BodysCmb" Grid.Column="1" SelectionChanged="BodysCmb_SelectionChanged"/>
-                <ComboBox Name="EngineTypesCmb" Grid.Column="2" SelectionChanged="EngineTypesCmb_SelectionChanged"/>
-            </Grid>
-            <ListView Name="AdsLv" Grid.Row="1" SelectionChanged="adsLv_SelectionChanged">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Grid Height="250">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="400" />
-                                        <ColumnDefinition Width="350" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="auto" />
-                                            <RowDefinition Height="auto" />
-                                            <RowDefinition Height="40" />
-                                        </Grid.RowDefinitions>
-                                        <TextBlock TextWrapping="Wrap">
-                                            <TextBlock.Text>
-                                                <MultiBinding StringFormat="{}{0} {1}, {2:yyy}">
-                                                    <Binding Path="Car.Brand.Name"/>
-                                                    <Binding Path="Car.Model"/>
-                                                    <Binding Path="Car.DateOfRelease"/>
-                                                </MultiBinding>
-                                            </TextBlock.Text>
-                                        </TextBlock>
-                                        <TextBlock Grid.Row="1" Text="{Binding Cost, StringFormat={}{0:N0} руб.}"/>
-                                        <TextBlock Grid.Row="2" >
-                                        <Hyperlink>
-                                            <TextBlock Text="{Binding Car.DealerShip.Name}"/>
-                                        </Hyperlink>
-                                        </TextBlock>
-                                    </Grid>
-                                    <Image Stretch="Uniform" Grid.Column="1" Source="{Binding Car.Photo.Route}"/>
-                                </Grid>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-            
-        </Grid>-->
     </Grid>
 </Window>

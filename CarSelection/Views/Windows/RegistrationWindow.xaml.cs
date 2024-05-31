@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarSelection.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace CarSelection.Views.Windows
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        CarSelectionEntities _context = App.GetContext();
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -27,12 +29,28 @@ namespace CarSelection.Views.Windows
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             AuthorisationWindow authorisationWindow = new AuthorisationWindow();
-            authorisationWindow.ShowDialog();
+            authorisationWindow.Show();
             Close();
         }
 
         private void registerBtn_Click(object sender, RoutedEventArgs e)
         {
+            User newUser = new User() 
+            {
+                Lastname = LastnameTb.Text,
+                Name = NameTb.Text,
+                Surname = SurnameTb.Text,
+                PhoneNumber = PhoneTb.Text,
+                Email = eEmailTb.Text,
+                DateOfBirth = (DateTime)DateOfBirthPicker.SelectedDate,
+                Login = LoginTb.Text,
+                Password = PasswordTb.Password
+            };
+            _context.User.Add(newUser);
+            _context.SaveChanges();
+            AuthorisationWindow authorisation = new AuthorisationWindow();
+            authorisation.Show();
+            Close();
 
         }
     }

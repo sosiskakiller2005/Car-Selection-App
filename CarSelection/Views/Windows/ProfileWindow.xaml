@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarSelection.Views.Windows"
         mc:Ignorable="d"
-        Title="ProfileWindow" Height="600" Width="800"
+        Title="Личный кабинет" Height="600" Width="800"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Name="ProfileGrid" Margin="20, 0, 20, 10">
         <Grid.ColumnDefinitions>

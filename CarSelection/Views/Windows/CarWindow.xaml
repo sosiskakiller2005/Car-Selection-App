@@ -14,10 +14,11 @@
         </Grid.RowDefinitions>
         <TextBlock Name="CarNameTbl" FontSize="35" FontWeight="DemiBold" Margin="10,0,0,0">
             <TextBlock.Text>
-                <MultiBinding StringFormat="{}{0} {1}, {2:yyy}">
+                <MultiBinding StringFormat="{}{0} {1}, {2:yyy}  {3}">
                     <Binding Path="Car.Brand.Name"/>
                     <Binding Path="Car.Model"/>
                     <Binding Path="Car.DateOfRelease"/>
+                    <Binding Path="Car.Brand.Country.Name"/>
                 </MultiBinding>
             </TextBlock.Text>
         </TextBlock>
@@ -30,8 +31,8 @@
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-        
-        <ScrollViewer Grid.Row="1">
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <ScrollViewer.Content>
                 <Grid Margin="10,0,0,10" Name="AdGrid" Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -41,7 +42,8 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*" />
-                        <RowDefinition Height=".5*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
                     <Grid>
@@ -98,22 +100,23 @@
                             <TextBlock Text="Привод" Grid.Row="14"/>
                             <TextBlock Text="{Binding Car.Drive.Name}" Grid.Row="14" Grid.Column="2"/>
                             <TextBlock Text="Дилер" Grid.Row="16"/>
-                            <TextBlock Grid.Row="16" Grid.Column="2" TextWrapping="Wrap">
+                            <TextBlock Grid.Row="16" Grid.Column="2">
                                 <Hyperlink Click="Hyperlink_Click">
-                                    <TextBlock Text="{Binding Car.DealerShip.Name}"/>
+                                    <TextBlock Text="{Binding Car.DealerShip.Name}" TextWrapping="Wrap"/>
                                 </Hyperlink>
                             </TextBlock>
                         </Grid>
                     </Grid>
 
                     <Image Stretch="Uniform" Grid.Column="2" Source="{Binding Car.Photo.Route}"/>
-                    <Button Name="FavouriteBtn" Click="FavouriteBtn_Click" Width="50"  Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Button Name="FavouriteBtn" Click="FavouriteBtn_Click" Width="50"  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}">
                         <Button.Content>
                             <Image Name="iconImage" Source="\Resources\white-heart-icon.jpg"/>
                         </Button.Content>
                     </Button>
+
+                    <TextBlock Text="{Binding Car.Description}" Grid.Row="1" HorizontalAlignment="Left" Grid.ColumnSpan="3" TextWrapping="Wrap"/>
                 </Grid>
-                
             </ScrollViewer.Content>
         </ScrollViewer>
     </Grid>

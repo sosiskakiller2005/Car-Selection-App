@@ -5,5 +5,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Height" Value="50" />
+        <Setter Property="FontFamily" Value="Inter" />
+
     </Style>
 </ResourceDictionary>

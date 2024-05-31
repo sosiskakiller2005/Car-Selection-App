@@ -5,10 +5,13 @@
         <!--<Setter Property="Width" Value="370"/>-->
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Inter" />
         <Setter Property="IsEditable" Value="True" />
     </Style>
     <Style TargetType="ComboBoxItem">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Inter" />
+
     </Style>
 </ResourceDictionary>

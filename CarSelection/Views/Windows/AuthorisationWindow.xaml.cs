@@ -50,22 +50,21 @@ namespace CarSelection.Views.Windows
                 string password = PasswordTb.Password;
                 foreach (User user in users)
                 {
-                    if (user.Login == login & user.Password == password)
+                    if (user.Login == login && user.Password == password)
                     {
                         Transporter.SelectedUser = user;
                         DialogResult = true;
                         this.Close();
-                        break;
-                    }
-                    else if (user.Login != login)
-                    {
-                        MessageBoxHelper.Error("Пользователь с данным логином не найден");
-                        break;
-                    }
+                        break;                    }
                     else if (user.Login == login & user.Password != password)
                     {
                         MessageBoxHelper.Error("Неправильно введен пароль");
+                        DialogResult = true;
                         break;
+                    }
+                    if (DialogResult == false)
+                    {
+                        MessageBoxHelper.Error("Пользователь с таким логином не найден");
                     }
                 }
             }
@@ -74,8 +73,8 @@ namespace CarSelection.Views.Windows
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow();
-            registrationWindow.ShowDialog();
-            Close();
+            registrationWindow.Show();
+            this.Close();
         }
     }
 }

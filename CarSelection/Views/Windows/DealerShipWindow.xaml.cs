@@ -21,6 +21,7 @@ namespace CarSelection.Views.Windows
     public partial class DealerShipWindow : Window
     {
         CarSelectionEntities _context = App.GetContext();
+        Advertisement _selectedAd;
         public DealerShipWindow(DealerShip selectedDealership)
         {
             InitializeComponent();
@@ -31,7 +32,9 @@ namespace CarSelection.Views.Windows
 
         private void AdsLv_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            _selectedAd = AdsLv.SelectedItem as Advertisement;
+            CarWindow carWindow = new CarWindow(_selectedAd);
+            carWindow.ShowDialog();
         }
     }
 }
